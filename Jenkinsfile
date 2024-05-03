@@ -4,6 +4,9 @@ pipeline {
         jdk 'jdk17'
         nodejs 'node16'
     }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
     stages {
         stage ('clean workspace') {
             steps {
@@ -18,9 +21,12 @@ pipeline {
         stage ('Sonarqube analysis') {
             steps {
                 script {
-                        withSonarQubeEnv(credentialsId: 'SOnar-token') {
-                        sh """ -Dsonar.projectKey=nodejs-sonar-sample \
-                            -Dsonar.sources=. """
+                        withSonarQubeEnv(credentialsId: 'SOnar-Token') {
+                        sh """ 
+                        $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectKey=nodejs-sonar-sample \
+                        -Dsonar.sources=. 
+                            """
                     }
                 }
             }
