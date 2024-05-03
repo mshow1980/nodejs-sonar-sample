@@ -22,11 +22,11 @@ pipeline {
         }
         stage ('SOnarQube Analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'SOnar-token') {
-                    sh ' npm run sonar'
+                    nodejs(nodeJSInstallationName: 'nodejs16') {
+                        sh 'npm run sonar'
+                    }
                 }
             }
-        }
         stage ('SOnar Quality Gate') {
             steps {
                 waitForQualityGate abortPipeline: false, credentialsId: 'SOnar-token'
