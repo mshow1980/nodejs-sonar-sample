@@ -15,20 +15,14 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mshow1980/nodejs-sonar-sample.git']])
             }
         }
-        stage ('SOnarQube Analysis') {
+        stage ('Sonarqube analysis') {
             steps {
                 script {
-                withSonarQubeEnv(credentialsId: 'SOnar-token') {
+                        withSonarQubeEnv(credentialsId: 'SOnar-token') {
                         sh """ -Dsonar.projectKey=nodejs-sonar-sample \
                             -Dsonar.sources=. """
-                    }
                 }
-            }
-        stage ('SOnar Quality Gate') {
-            steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'SOnar-token'
             }
         }
     }
-}
 }
