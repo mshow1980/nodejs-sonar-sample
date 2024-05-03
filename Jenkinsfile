@@ -2,7 +2,7 @@ pipeline {
     agent any 
     tools {
         jdk 'jdk17'
-        nodejs 'nodejs16'
+        nodejs 'node16'
     }
     stages {
         stage ('clean workspace') {
@@ -18,18 +18,6 @@ pipeline {
         stage ('Building application') {
             steps {
                 sh ' npm install'
-            }
-        }
-        stage ('SOnarQube Analysis') {
-            steps {
-                withSonarQubeEnv(credentialsId: 'SOnar-token') {
-                    sh ' npm run sonar'
-                }
-            }
-        }
-        stage ('SOnar Quality Gate') {
-            steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'SOnar-token'
             }
         }
     }
