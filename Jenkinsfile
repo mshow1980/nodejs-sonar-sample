@@ -15,6 +15,11 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mshow1980/nodejs-sonar-sample.git']])
             }
         }
+        stage ('Building application') {
+            steps {
+                sh ' npm install'
+            }
+        }
         stage ('SOnarQube Analysis') {
             steps {
                 withSonarQubeEnv(credentialsId: 'SOnar-token') {
