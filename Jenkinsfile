@@ -21,6 +21,7 @@ pipeline {
                         withSonarQubeEnv(credentialsId: 'SOnar-token') {
                         sh """ -Dsonar.projectKey=nodejs-sonar-sample \
                             -Dsonar.sources=. """
+                    }
                 }
             }
         }
