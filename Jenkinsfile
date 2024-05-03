@@ -22,8 +22,8 @@ pipeline {
         }
         stage ('SOnarQube Analysis') {
             steps {
-                nodejs(nodeJSInstallationName: 'nodejs16') {
                 withSonarQubeEnv(credentialsId: 'SOnar-token') {
+                    nodejs(nodeJSInstallationName: 'nodejs16') {
                         sh 'npm run sonar'
                     }
                 }
