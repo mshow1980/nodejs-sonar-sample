@@ -21,7 +21,7 @@ pipeline {
         stage ('Sonarqube analysis') {
             steps {
                 script {
-                    sh " npm sonar"
+                    sh " npm run sonar"
                     }
                 }
             }
