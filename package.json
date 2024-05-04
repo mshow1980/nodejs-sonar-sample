@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sonar": "node sonar-project.js"
+    "sonar": "nodejs sonar-project.js"
     
   },
   "eslintConfig": {
