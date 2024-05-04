@@ -21,15 +21,9 @@ pipeline {
         stage ('Sonarqube analysis') {
             steps {
                 script {
-                        withSonarQubeEnv(credentialsId: 'sonar-scanner') {
-                        sh """ 
-                        $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectKey=nodejs-sonar-sample \
-                        -Dsonar.sources=. 
-                            """
+                    sh " npm sonar"
                     }
                 }
             }
         }
     }
-}
