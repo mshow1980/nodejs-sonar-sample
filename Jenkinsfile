@@ -7,9 +7,9 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         DOCKER_USERNAME = 'mshow1980'
-        APP_NAME = 'nodejs-sonar-sample'
+        APP_NAME = 'nodejs-scion-scope'
         IMAGE_NAME = "${ DOCKER_USERNAME}"+"/"+"${APP_NAME}"
-        RELEASE = "2.0"
+        RELEASE = "3.0"
         IMAGE_TAG = "${RELEASE}"+"${BUILD_NUMBER}"
         REGISTRY_CREDS = 'Docker-Login'
     }
