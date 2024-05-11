@@ -39,6 +39,7 @@ pipeline {
                     npm install sonar-scanner
                     npm run sonar 
                     """
+                    }
                 }
             }
         }
@@ -113,4 +114,3 @@ pipeline {
                 }
             }
         }
-    }
