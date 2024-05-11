@@ -71,7 +71,7 @@ pipeline {
             }
         stage ('Deploying ARtifact'){
             steps{
-                sh 'mvn publish'
+                sh 'npm publish'
             }
         }        
         stage ('Building  Push Image') {
