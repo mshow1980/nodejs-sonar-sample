@@ -77,10 +77,9 @@ pipeline {
                     nexusUrl: '100.26.228.243:8081/repository/nodejs-hosted/',
                     nexusVersion: 'nexus2', 
                     protocol: 'http', 
-                    repository: 
-                    'http://100.26.228.243:8081/repository/nodejs-hosted/', 
+                    repository: 'http://100.26.228.243:8081/repository/nodejs-hosted/', 
                     version: '3.68'
-                    sh 'npm publish'
+                    sh "npm publish"
                 }
             }
         }        
