@@ -68,7 +68,12 @@ pipeline {
                     sh 'trivy fs . > trivyfile.txt'
                     }
                 }
-            }        
+            }
+        stage ('Deploying ARtifact'){
+            steps{
+                sh 'mvn publish'
+            }
+        }        
         stage ('Building  Push Image') {
             steps {
                 script{
@@ -90,7 +95,7 @@ pipeline {
                 color: 'Blue', 
                 message: '"started ${JOB_NAME} ${BUILD_NUMBER} (<${BUILD_URL}|Open>)"', 
                 teamDomain: 'scionventuresllc', 
-                tokenCredentialId: 'Slack-login'
+                tokenCredentialId: 'Slack-Token'
                 }
             }
         }
