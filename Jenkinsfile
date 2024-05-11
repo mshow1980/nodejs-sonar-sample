@@ -11,7 +11,7 @@ pipeline {
         IMAGE_NAME = "${ DOCKER_USERNAME}"+"/"+"${APP_NAME}"
         RELEASE = "3.0"
         IMAGE_TAG = "${RELEASE}"+"${BUILD_NUMBER}"
-        REGISTRY_CREDS = 'Docker-Login'
+        REGISTRY_CREDS = 'docker-login'
     }
     stages {
         stage('CleanWS') {
@@ -34,10 +34,18 @@ pipeline {
         stage ('Sonarqube analysis'){
             steps {
                 script {
+                    withSonarQubeEnv(credentialsId: 'SOnar-Token') {
                     sh """
                     npm install sonar-scanner
                     npm run sonar 
                     """
+                }
+            }
+        }
+        stage ('Quality gate'){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'SOnar-Token'
                 }
             }
         }
@@ -63,7 +71,7 @@ pipeline {
         stage ('Building  Push Image') {
             steps {
                 script{
-                withDockerRegistry(credentialsId: 'Docker-Login', toolName: 'docker') {
+                withDockerRegistry(credentialsId: 'docker-login', toolName: 'docker') {
                     docker_image = docker.build "${IMAGE_NAME}"
                     docker_image.push("${IMAGE_TAG}")
                     docker_image.push("latest")
@@ -103,5 +111,6 @@ pipeline {
                 subject: '"Job \'${JOB_NAME}\' (${BUILD_NUMBER}) is waiting for input",', 
                 to: 'scionventureslls@gmail.com'
                 }
+            }
         }
     }
