@@ -2,6 +2,9 @@
   "name": "nodejs-sonar-sample",
   "version": "0.1.0",
   "private": true,
+  "publishConfig": {
+    "registry": "http://100.26.228.243:8081/repository/nodejs-hosted/"
+  },
   "dependencies": {
     "@heroicons/react": "^2.0.16",
     "@reduxjs/toolkit": "^1.9.3",
