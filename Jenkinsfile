@@ -85,7 +85,7 @@ pipeline {
                 }    
             }
         }
-        stage("TRIVY Image SCAN"){
+        stage ("TRIVY Image SCAN"){
             steps{
                     sh "trivy --timeout 10m image mshow1980/nodejs-sonar-sample:latest > trivyimage.txt "
             }
